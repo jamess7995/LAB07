@@ -1,0 +1,41 @@
+ssh -l seed 192.168.0.4;
+
+ls -l /usr/bin/passwd;
+
+sudo touch myprog;
+sudo chown root myprog;
+sudo chmod 4755 myprog;
+ls -ls myprog;
+
+sudo git clone https://github.com/ndctdmh/cyber262;
+cd cyber262;
+sudo gcc stack.c -o stack -z execstack -fno-stack-protector;
+sudo chown root stack;
+sudo chmod 4755 stack;
+
+sudo sysctl -w kernel.randomize_va_space=0;
+sudo rm /bin/sh;
+sudo ln -s /bin/zsh /bin/sh;
+
+sudo touch badfile;
+./stack;
+
+sudo gcc stack.c -o stack_gdb -g -z execstack -fno-stack-protector;
+sudo touch badfile;
+gdb stack_gdb;
+
+sudo chmod 755 exploit.py;
+
+sudo ./exploit.py ;
+./stack ; 
+
+sudo git clone https://github.com/ndctdmh/cyber262;
+cd cyber262;
+sudo gcc stack.c -o stack -z execstack -fno-stack-protector;
+sudo chmod 4755 stack;
+sudo chown root stack;
+
+sudo gcc stack.c -o stack_gdb -g -z execstack -fno-stack-protector;
+sudo touch badfile;
+gdb stack_gdb;
+
